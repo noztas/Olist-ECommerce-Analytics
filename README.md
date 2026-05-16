@@ -39,7 +39,7 @@ Security products average 2.5 stars. Diapers: 3.4. Housewares ship at 40% freigh
 Raw CSVs → Bronze (raw Delta) → Silver (cleaned) → Silver Enriched (joined) → Gold (KPIs) → Dashboard
 ```
 
-![Pipeline DAG](screenshots/pipeline_dag.png)
+<img src="screenshots/Olist-Pipeline.PNG" width="700">
 
 *9 Silver tasks run in parallel, funnel into one enriched table, then produce 5 Gold KPI tables. Full pipeline: ~9 minutes.*
 
