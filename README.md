@@ -35,6 +35,11 @@ Security products average 2.5 stars. Diapers: 3.4. Housewares ship at 40% freigh
 
 ## Architecture
 
+> Raw CSVs → Bronze (raw Delta) → Silver (cleaned) → Silver Enriched (joined) → Gold (KPIs) → Dashboard
+
+<img src="screenshots/Olist_Medallion_Architecture.png" width="700">
+
+*Conceptual flow: each layer has a distinct responsibility, with Databricks Workflows orchestrating the full pipeline end-to-end.*
 ```
 Raw CSVs → Bronze (raw Delta) → Silver (cleaned) → Silver Enriched (joined) → Gold (KPIs) → Dashboard
 ```
