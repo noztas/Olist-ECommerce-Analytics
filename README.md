@@ -50,19 +50,19 @@ Raw CSVs → Bronze (raw Delta) → Silver (cleaned) → Silver Enriched (joined
 ## Dashboard
 
 ### Executive Overview
-![Executive Overview](screenshots/executive_overview.png)
+<img src="screenshots/Executive_Overview_Dashboard.PNG" width="700">
 
 ### Product Categories
-![Product Analysis](screenshots/product_analysis.png)
+<img src="screenshots/Product_Category_Analysis_Dashboard.PNG" width="700">
 
 ### Delivery Performance
-![Delivery Performance](screenshots/delivery_performance.png)
+<img src="screenshots/Delivery_Performance_Dashboard.PNG" width="700">
 
 ### Customer Segments
-![Customer Analysis](screenshots/customer_analysis.png)
+<img src="screenshots/Customer_Analysis_Dashboard.PNG" width="700">
 
 ### Summary
-![Summary Dashboard](screenshots/summary_dashboard.png)
+<img src="screenshots/Olist_E-Commerce_Overall_Dashboard.PNG" width="700">
 
 ---
 
@@ -124,7 +124,6 @@ Built on a hybrid model — KPI cards use DAX measures against the enriched tabl
 - Replace `inferSchema` with explicit schemas
 - Add automated data quality tests with alerting
 - Switch from full overwrite to incremental merge/upsert
-- Schedule the pipeline (daily trigger) + Power BI auto-refresh
 - Partition large tables by date
 
 ---
