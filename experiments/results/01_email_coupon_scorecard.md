@@ -1,45 +1,53 @@
-# A/B Test Scorecard — Email Coupon v1
+# A/B Test: Email Coupon for One-Time Buyers
 
-**Hypothesis:** 10% off coupon email lifts 30-day repurchase rate by ≥ 1pp
-**Sample:** 12,010 customers, 50/50 split
-**Duration:** 30 days
-**Eligibility:** One-time buyers, 60–180 days since last order, as of 2018-09-01
+**What I tested:** Does a 10% off coupon email actually bring one-time buyers back?
 
-## Primary metric — 30-day repurchase rate
+**Setup:** 12,010 customers from the silver layer, all one-time buyers who hadn't ordered in 60 to 180 days. Split 50/50: half got the email, half didn't. Measured who came back within 30 days.
 
-| Group | Rate | n |
+**Why 12,010?** That's the sample size needed to reliably detect a 1 percentage point lift (α = 0.05, power = 0.80). Power analysis details are in the notebook.
+
+## Results
+
+### Did they come back?
+
+| Group | Repurchase rate | Customers |
 |---|---|---|
-| Control | 3.58% | 6,005 |
-| Treatment | 4.63% | 6,005 |
+| No email (control) | 3.58% | 6,005 |
+| Email (treatment) | 4.63% | 6,005 |
 
-- **Absolute lift:** +1.05 pp
-- **Relative lift:** +29.30%
-- **95% CI on lift:** [+0.34 pp, +1.76 pp]
-- **p-value:** 0.0038
-- Statistical significance: YES
-- Practical significance: YES
+The email lifted repurchase rate by **1.05 percentage points** (95% CI: 0.34 to 1.76, p = 0.0038).
 
-## Guardrails
+In plain language: about 1 extra customer per 100 came back because of the email. It's not huge, but it's real.
 
-| Guardrail | Treatment | Control | Change | Verdict |
-|---|---|---|---|---|
-| AOV (R$) | 151.42 | 149.32 | +1.41% | OK |
-| Review score | 4.16 | 4.15 | — | OK |
+### Did it hurt anything?
 
-## Decision: **SHIP**
+| Guardrail | Control | Treatment | Verdict |
+|---|---|---|---|
+| Average order value | R$ 149.32 | R$ 151.42 | OK, no drop |
+| Review score | 4.15 | 4.16 | OK, both above 4.0 |
 
-Significant lift, above practical threshold, no guardrail breach.
+Nothing broke. Margin held, reviews held.
 
-### Post-launch monitoring
-- **Cannibalization risk** — some of the +1pp may pull demand forward rather than create incremental purchases. Recommend a 90-day post-launch cohort comparison vs a permanent holdout to estimate true incrementality.
-- **AOV drift** — our test showed AOV roughly stable, but the AOV sample was small (n≈250 per group). Monitor weekly post-launch.
-- **Audience fatigue** — limit re-sends to one coupon per customer per quarter.
+## Decision: Ship it
 
-### Next experiments
-1. **Coupon-depth test** — 10% vs 15% vs 20%. Find the discount level that maximizes incremental margin, not just incremental revenue.
-2. **Send-time test** — same coupon, different time of day. Cheap to run, often yields meaningful lift.
-3. **Holdout discipline** — keep a permanent ~5% holdout from all CRM sends to estimate long-term program ROI.
+The lift is real, it's above the minimum I care about (0.5 pp), and no guardrails broke. Send the coupon to the rest of the eligible base.
+
+## What I'd watch after launch
+
+A few things to keep an eye on before calling this a full win:
+
+1. **Were these customers going to buy anyway?** Some of the lift might just be people who'd have come back on their own, just sooner. To find out, keep a small group permanently out of the campaign and compare them after 90 days.
+
+2. **The AOV story is fragile.** Only about 250 customers actually repurchased in each group, so the AOV numbers have wide error bars. Keep watching it weekly once the campaign is live.
+
+3. **Don't burn out the audience.** One coupon per customer per quarter, max.
+
+## What I'd test next
+
+1. **Different coupon amounts.** 10% vs 15% vs 20%. Find the level that maximizes profit per email, not just response rate.
+2. **Send time of day.** Cheap to test, often surprising results.
+3. **Build a permanent holdout group.** Keep 5% of customers out of every CRM campaign forever, so we can measure how much the whole program is actually worth.
 
 ---
 
-*Test design: α=0.05, power=0.80, MDE=1pp, two-sided. Random seed: 42. Methodology validated against simulated true effect of +1pp (recovered as +1.05pp, well within 95% CI).*
+*Test setup: α = 0.05, power = 0.80, MDE = 1pp, two-sided. Random seed: 42. The test was simulated end-to-end on real Olist customers with a baked-in true effect of +1 pp, and the analysis recovered +1.05 pp. So I trust the methodology.*
