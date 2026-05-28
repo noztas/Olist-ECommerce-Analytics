@@ -8,11 +8,11 @@ I took 100K+ real e-commerce transactions, built a Medallion data pipeline in Da
 
 ## What I Found
 
-These are real findings from real data — the kind of insights that drive business decisions.
+These are real findings from real data - the kind of insights that drive business decisions.
 
 💰 **Revenue is growing fast, but it's concentrated.** Olist grew 120% YoY to R$ 16M. But Health & Beauty and Watches alone drive 30% of all revenue. Top 5 categories account for 60%. That's growth built on a narrow foundation.
 
-🚚 **Deliveries are early — on purpose.** Average delivery takes 12 days, but orders consistently arrive ~12 days before the promised date. Olist is underpromising to protect review scores. Smart tactic, but northern states (AP: 28 days) still wait twice as long as São Paulo.
+🚚 **Deliveries are early - on purpose.** Average delivery takes 12 days, but orders consistently arrive ~12 days before the promised date. Olist is underpromising to protect review scores. Smart tactic, but northern states (AP: 28 days) still wait twice as long as São Paulo.
 
 👤 **Almost nobody comes back.** 96% of customers buy exactly once. The 3% who return spend 2–3× more per order and rate higher. This marketplace has an acquisition engine but no retention strategy.
 
@@ -117,13 +117,13 @@ Notebook: [`experiments/01_ab_test_email_coupon.py`](experiments/01_ab_test_emai
 - Validation flags — timeline checks, price validation, delivery classification
 - Feature engineering — delivery time, approval speed, freight ratio, late delivery flag
 
-**Silver Enriched:** 7-table JOIN in SQL. Payments and reviews pre-aggregated to one row per order before joining — without this, row count would explode from 112K to 300K+.
+**Silver Enriched:** 7-table JOIN in SQL. Payments and reviews pre-aggregated to one row per order before joining - without this, row count would explode from 112K to 300K+.
 
 **Gold:** 5 business KPI tables written in SQL with conditional aggregation, CTEs, and NULLIF-safe division.
 
 ### The Dashboard (Power BI)
 
-Built on a hybrid model — KPI cards use DAX measures against the enriched table for dynamic filtering, while charts read from pre-aggregated Gold tables for fast rendering. DateTable dimension enables proper time intelligence (YoY, MoM).
+Built on a hybrid model - KPI cards use DAX measures against the enriched table for dynamic filtering, while charts read from pre-aggregated Gold tables for fast rendering. DateTable dimension enables proper time intelligence (YoY, MoM).
 
 ---
 ## Project Structure
